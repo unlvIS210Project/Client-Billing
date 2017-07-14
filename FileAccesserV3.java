@@ -34,7 +34,7 @@ public class FileAccesserV3 {
 		else if (fileact.equalsIgnoreCase("write")){//for when the program is in write mode
 			
 		}
-	System.exit(0);
+	System.exit(0);//closes and shuts down the program
 	}			
 
 }
