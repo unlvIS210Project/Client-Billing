@@ -2,7 +2,9 @@ package FinalProject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Project {
@@ -23,11 +25,16 @@ public class Project {
 			String fileact=keyboard.nextLine(); //this is what the desired action for the file is do not panic
 			if (fileact.equalsIgnoreCase("read")){ //tests if its read or write, and goes down code path for it
 				 //prompts user for file name
-				File file;
-				do {// checks to make sure that the file exists
+				File file = null;
 				System.out.println("\nPlease input the file name.\n");
+				do {// checks to make sure that the file exists
 				filenameR=keyboard.nextLine();//gets file name
 				file = new File(filenameR.toLowerCase());//changes the text to lower case to resolve case errors
+					
+					if(!(file.exists())){
+					System.out.println("This file title is invalid");	
+					}
+					System.out.println("\nPlease input the file name.\n");
 				}while(!(file.exists()));
 				String line = null;//initialize temp string
 			    Scanner inputFile = new Scanner(file);//makes new scanner object for the file
@@ -47,18 +54,34 @@ public class Project {
 				  }
 			      // Close the file.
 			      inputFile.close();//after file is done printing out, closes it
+			      			System.out.println("Total time: "+ totalTime);
+			
+			System.out.println("Total cost: "+ finalCost(HR_PRICE, totalTime));
+			      
 			}
 			else if (fileact.equalsIgnoreCase("write")){//for when the program is in write mode
 				
+				double time = 0;
+				
+				System.out.println("Please enter the file that you wish to edit");
+				String outputFile = keyboard.nextLine();
+				FileWriter editFile = new FileWriter(outputFile, true);
+				PrintWriter outFile = new PrintWriter(editFile);
+				System.out.println("Please enter the time: ");
+				time = keyboard.nextDouble();
+				System.out.println("Please enter the summary: ");
+				Scanner kb = new Scanner(System.in);
+				String summaryProject = kb.nextLine();
+				outFile.println(time+" "+ summaryProject);
+				
+				outFile.close();
 			}
 			
-			System.out.println("Total time: "+ totalTime);
-			
-			System.out.println("Total cost: "+ finalCost(HR_PRICE, totalTime));
-		System.exit(0);//closes and shuts down the program
+		
+		//closes and shuts down the program
 		//End read file by Sean
 		}
-	
+
 	public static double finalCost(double HR_PRICE, double totalTime){
 		double finalCost = 0;
 		finalCost = HR_PRICE * totalTime;
