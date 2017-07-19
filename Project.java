@@ -63,7 +63,7 @@ public class Project {
 				
 				double time = 0;
 				
-				System.out.println("Please enter the file that you wish to edit");
+				System.out.println("Please enter the file that you wish to edit:");
 				String outputFile = keyboard.nextLine();
 				FileWriter editFile = new FileWriter(outputFile, true);
 				PrintWriter outFile = new PrintWriter(editFile);
