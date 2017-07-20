@@ -352,7 +352,8 @@ public class FinalProject extends JFrame {
 			System.exit(0);
 		}
 	}
-	private class BtnNewProjectCancel implements ActionListener {
+	
+	private class BtnNewProjectCancel implements ActionListener {//This will reset the text in the Lable and text window
 		public void actionPerformed(ActionEvent e) {
 			txtNewProjectField.setText("");
 			lblNewProjectError.setText("");
@@ -413,21 +414,20 @@ public class FinalProject extends JFrame {
 				
 				}
 				else{
-					System.out.println("here");
 					FileCreatedpanel.setVisible(true);
 					NewProjectpanel.setVisible(false);
 					
 			FileWriter editFile;
 			try {
 				
-				editFile = new FileWriter(outputFile, true);
+				editFile = new FileWriter(outputFile, true);// makes sure to not erase the information present in the file
 				PrintWriter outFile = new PrintWriter(editFile);
-				outFile.close();
+				outFile.close();// closes the open file
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			txtNewProjectField.setText("");
+			txtNewProjectField.setText("");// this clears any entry in text and label
 			lblNewProjectError.setText("");
 				}
 		}
@@ -534,7 +534,7 @@ public class FinalProject extends JFrame {
 				filenameR = txtShowProjectField.getText()+".txt";
 				file = new File(filenameR.toLowerCase());
 				
-				if(filenameR.equals(".txt")){
+				if(filenameR.equals(".txt")){// this if statement will check to make sure that the user input for file is reasonable
 					lblShowProjectError.setText("ERROR: Please enter a file name");
 					System.out.println("HERE");
 				}
@@ -559,28 +559,26 @@ public class FinalProject extends JFrame {
 							 while(inputFile.hasNext()){//while loop for while the file has more data
 							      // Read the first line from the file.
 							      line = inputFile.nextLine();//makes a temp string equal a line of text
-							      int space = line.indexOf(' ');
-							      String summary = line.substring(space+1);
+							      int space = line.indexOf(' ');// creates and index for a space in between the number and the summary
+							      String summary = line.substring(space+1);// reads the summary
 							      
-							      String numberOfLine = line.substring(0, space);
+							      String numberOfLine = line.substring(0, space);// reads the number of hours
 							      double entry = Double.parseDouble(numberOfLine);
-							      totalTime += entry;
-							      DecimalFormat hrsfm = new DecimalFormat("#.0");
-							      lblTotalHoursWorked.setText(hrsfm.format(totalTime)+"");
-							     
-							      
-							      number++;
-							      
+							      totalTime += entry;// keeps adding the time from each line
+							      DecimalFormat hrsfm = new DecimalFormat("#.0");// sets up a decimal format for time
+							      lblTotalHoursWorked.setText(hrsfm.format(totalTime)+"");// displays the total time
+							   
+							      number++;// this will help the user keep track of the summaries and makes sure they do not blend by numbering them off
 							      String output=txtProjectSummaries.getText()+"\n"+number+": "+ summary;
 							      txtProjectSummaries.setText(output);
 							      
 						    }
 							 double finalCost = 0;
 							 //decimal formatter for money
-							finalCost = finalCost(HR_PRICE, totalTime);
-							DecimalFormat $fm = new DecimalFormat("#,###,###.00");
+							finalCost = finalCost(HR_PRICE, totalTime);// gets the result from the method
+							DecimalFormat $fm = new DecimalFormat("#,###,###.00");// format for total amount
 							//shows the total amount of money required
-							 lblTotalCost.setText("$"+$fm.format(finalCost)+"");
+							 lblTotalCost.setText("$"+$fm.format(finalCost)+"");// will diplay the final cost
 						} catch (FileNotFoundException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
